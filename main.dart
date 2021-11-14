@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tunico Messaging',
+      title: 'Messaging App',
       theme: themeData(context),
       home: Home(),
     );
