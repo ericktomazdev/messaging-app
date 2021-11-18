@@ -16,6 +16,31 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+
+
+  List<Map<String, dynamic>> messageCardData = [
+    {
+      'imagePath': 'assets/images/sidnei_silvestre.jpg',
+      'firstName': 'Sidnei',
+      'lastName': 'Silvestre',
+      'hasActivity': true,
+      'messagePreview': 'Passa no mercado e pega pão.',
+      'timeMessage': '22min',
+      'isRead': false,
+      'unreadMessage': 1,
+    },
+    {
+      'imagePath': 'assets/images/davi_firmino.jpg',
+      'firstName': 'Davi',
+      'lastName': 'Firmino',
+      'hasActivity': true,
+      'messagePreview': 'Realmente kkk coisa de louco, mas mesmo assim, acredito',
+      'timeMessage': '14min',
+      'isRead': true,
+      'unreadMessage': 4,
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,47 +64,22 @@ class _BodyState extends State<Body> {
           SectionDescription(
             descriptionText: 'Mensagens',
           ), 
-          const SizedBox(height: 20),
-          MessageCard(
-            imagePath: 'assets/images/davi_firmino.jpg',
-            firstName: 'Davi',
-            lastName: 'Firmino',
-            hasActivity: true,
-            messagePreview: 'Realmente kkk coisa de louco, mas mesmo assim, acredito 😑',
-            timeMessage: '14min',
-            unreadMessage: 3,
-          ),   
-          const SizedBox(height: 20),
-           MessageCard(
-            imagePath: 'assets/images/nicolle_lacerda.jpg',
-            firstName: 'Nicolle',
-            lastName: 'Lacerda',
-            hasActivity: true,
-            messagePreview: 'Ai amor kk o que tem pra comer hoje? To com fome 😬',
-            timeMessage: '15min',
-            isRead: true,
-          ),
-          const SizedBox(height: 20),
-           MessageCard(
-            imagePath: 'assets/images/sidnei_silvestre.jpg',
-            firstName: 'Sidnei',
-            lastName: 'Silvestre',
-            hasActivity: true,
-            messagePreview: 'Passa no mercado e pega pão.',
-            timeMessage: '22min',
-            isRead: false,
-            unreadMessage: 1,
-          ), 
-          const SizedBox(height: 20),
-          MessageCard(
-            imagePath: 'assets/images/elen_cristina.jpg',
-            firstName: 'Elen',
-            lastName: 'Cristina',
-            hasActivity: true,
-            messagePreview: 'Oi filho, já saiu?',
-            timeMessage: '44min',
-            isRead: true,
-          ),
+          const SizedBox(height: 20), 
+          ...messageCardData.map<MessageCard>(
+            (element) { 
+              final messageCard = MessageCard()
+              ..imagePath = element['imagePath']
+              ..firstName = element['firstName']
+              ..lastName = element['lastName']
+              ..hasActivity = element['hasActivity']
+              ..messagePreview = element['messagePreview']
+              ..timeMessage = element['timeMessage']
+              ..unreadMessage = element['unreadMessage'];
+              return messageCard;
+              })
+              .where((element) => element.firstName.startsWith('S'))
+              .where((element) => element.firstName.contains('d'))
+              .toList(),
         ],
       ),
     );
