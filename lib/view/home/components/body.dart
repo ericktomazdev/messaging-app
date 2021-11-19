@@ -64,9 +64,21 @@ class _BodyState extends State<Body> {
           SectionDescription(
             descriptionText: 'Mensagens',
           ), 
-          const SizedBox(height: 20), 
-          ...messageCardData.map<MessageCard>(
+          const SizedBox(height: 15), 
+          ..._buildMessageCards(),
+        ],
+      ),
+    );
+  }
+
+
+  List<Widget> _buildMessageCards() {
+    return [
+      Column(
+        children: <Widget> [
+          ...messageCardData.map<Widget>(
             (element) { 
+              
               final messageCard = MessageCard()
               ..imagePath = element['imagePath']
               ..firstName = element['firstName']
@@ -75,14 +87,18 @@ class _BodyState extends State<Body> {
               ..messagePreview = element['messagePreview']
               ..timeMessage = element['timeMessage']
               ..unreadMessage = element['unreadMessage'];
-              return messageCard;
-              })
-              .where((element) => element.firstName.startsWith('S'))
-              .where((element) => element.firstName.contains('d'))
-              .toList(),
+
+              final messageCardInBox = Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
+                child: messageCard,
+              );
+
+              return messageCardInBox;
+              }).toList(),
         ],
       ),
-    );
+    ];
   }
 }
 
